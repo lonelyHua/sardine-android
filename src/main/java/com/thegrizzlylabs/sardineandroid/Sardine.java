@@ -208,7 +208,7 @@ public interface Sardine
 	 * @param contentType MIME type to add to the HTTP request header
 	 * @throws IOException I/O error or HTTP response validation failure
 	 */
-	void put(String url, byte[] data, String contentType) throws IOException;
+	void put(String url, byte[] data, String contentType,Long start,Long end) throws IOException;
 
 	/**
 	 * Uses <code>PUT</code> to send data to a server with a specific content
