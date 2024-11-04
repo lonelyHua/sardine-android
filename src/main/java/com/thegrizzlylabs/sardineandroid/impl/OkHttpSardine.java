@@ -285,15 +285,15 @@ public class OkHttpSardine implements Sardine {
     }
 
     @Override
-    public void put(String url, byte[] data,Long start,Long end) throws IOException {
-        this.put(url, data, null,start,end);
+    public void put(String url, byte[] data) throws IOException {
+        this.put(url, data, null);
     }
 
     @Override
-    public void put(String url, byte[] data, String contentType) throws IOException {
+    public void put(String url, byte[] data, String contentType,Long start,Long end) throws IOException {
         MediaType mediaType = contentType == null ? null : MediaType.parse(contentType);
         RequestBody requestBody = RequestBody.create(mediaType, data);
-        put(url, requestBody);
+        put(url, requestBody,start,end);
     }
 
     @Override
