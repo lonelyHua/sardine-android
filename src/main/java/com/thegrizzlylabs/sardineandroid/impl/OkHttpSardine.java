@@ -285,8 +285,8 @@ public class OkHttpSardine implements Sardine {
     }
 
     @Override
-    public void put(String url, byte[] data) throws IOException {
-        this.put(url, data, null);
+    public void put(String url, byte[] data,Long start,Long end) throws IOException {
+        this.put(url, data, null,start,end);
     }
 
     @Override
@@ -321,8 +321,17 @@ public class OkHttpSardine implements Sardine {
         put(url, requestBody, headersBuilder.build());
     }
 
-    private void put(String url, RequestBody requestBody) throws IOException {
-        put(url, requestBody, new Headers.Builder().build());
+    private void put(String url, RequestBody requestBody,Long start,Long end) throws IOException {
+       if(end!=null && end >0){
+            Headers headers = new Headers.Builder()
+                    .add("Content-Type", "application/octet-stream")
+                    .add("Content-Length", String.valueOf(end - start))  // 计算并添加内容长度
+                    .add("Content-Range", "bytes " + start + "-" + end + "/*") // 设置内容范围
+                    .build();
+            put(url, requestBody, headers);
+        }else{
+            put(url, requestBody, new Headers.Builder().build());
+        }
     }
 
     private void put(String url, RequestBody requestBody, Headers headers) throws IOException {
