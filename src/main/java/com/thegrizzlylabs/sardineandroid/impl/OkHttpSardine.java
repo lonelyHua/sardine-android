@@ -286,7 +286,7 @@ public class OkHttpSardine implements Sardine {
 
     @Override
     public void put(String url, byte[] data) throws IOException {
-        this.put(url, data, null);
+        this.put(url, data, null,null,null);
     }
 
     @Override
